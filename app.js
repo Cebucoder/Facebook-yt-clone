@@ -3,22 +3,25 @@ let mypost  = [];
 
 
 function Post(){
-let modal  = document.getElementById("Post-Modal");
 let PostStorage = JSON.parse(localStorage.getItem("PostStorage")) || [];
+let modal  = document.getElementById("Post-Modal");
+let input = document.getElementById("myinput").value;
+
+// let caption = document.getElementById("caption").innerHTML;
 
 
-    const input = document.getElementById("myinput").value;
-
-    // pusig my inputed text and save to local storage
+    // pusig my inputed text and save to local storage 
     PostStorage.push({Inputtedtext : input});
     localStorage.setItem("PostStorage", JSON.stringify(PostStorage));
+    document.getElementById("caption").innerHTML = input;
 
-    mypost = PostStorage;
+    // mypost = PostStorage;
+    mypost = PostStorage.reverse();
     showPost();
 
     modal.classList.remove("pop-modal-show");
-    document.getElementById("caption").innerHTML = input;
-    window.location.reload();
+    
+    // window.location.reload();
   
 }
 
@@ -26,16 +29,15 @@ let PostStorage = JSON.parse(localStorage.getItem("PostStorage")) || [];
 let PostStorage = JSON.parse(localStorage.getItem("PostStorage")) || [];
 let postContainer = document.getElementById("postContainer");
 function showPost(){
-    let postNumber = 0;
 
     postContainer.innerHTML = "";
-
-    PostStorage.forEach(function(PostStorage){
-        postNumber++;
+    let postNumber = 0;
+    mypost.forEach(function(PostStorage){
+    postNumber++;
     postContainer.innerHTML +=
 
         `
-        <div class="user-new-post">
+        <div class="user-new-post popup">
         <div class="user-new-header">
             <div class="myimage-post">
                 <div class="my-image">
@@ -68,8 +70,9 @@ function showPost(){
                 <p id="caption">${PostStorage.Inputtedtext}</p>
                 <!-- <p></p> -->
             </div>
-            <div class="user-img-post">
-              <!--<img src="" alt="">-->
+            <div class="user-img-post" id="PutImage">
+            <!--<img src="" alt="">-->
+              
             </div>
         </div>
 
@@ -99,16 +102,25 @@ function showPost(){
 
         </div>
     </div>
-        `;
-    },[]);
+        `
+    });
    
 }
-PostStorage = JSON.parse(localStorage.getItem("PostStorage")) || [];
-
+mypost = JSON.parse(localStorage.getItem("PostStorage")) || [];
 showPost();
 
 
+// delete post
+function Deletepost(postNumber){
+    let PostStorage = JSON.parse(localStorage.getItem("PostStorage")) || [];
+    PostStorage.splice(postNumber, 1);
+    localStorage.setItem("PostStorage", JSON.stringify(PostStorage));
+    // mypost = PostStorage.reverse();
+    mypost = PostStorage;
+    
+    showPost();
 
+}
 
 
 
@@ -124,19 +136,12 @@ function addZero(i) {
 //   let time = h + ":" + m + ":" + s;
   let time =  m +" m";
   document.getElementById("time").innerHTML = time;
+//   showPost();
 
 
 
 
-// delete post
-function Deletepost(postNumber){
-    let PostStorage = JSON.parse(localStorage.getItem("PostStorage")) || [];
-    PostStorage.splice(postNumber, 1);
-    localStorage.setItem("PostStorage", JSON.stringify(PostStorage));
-    mypost  = PostStorage;
-    showPost();
 
-}
 
 
 
