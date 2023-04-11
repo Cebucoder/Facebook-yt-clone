@@ -71,7 +71,7 @@ function showPost(){
                 <!-- <p></p> -->
             </div>
             <div class="user-img-post" id="PutImage">
-            <!--<img src="" alt="">-->
+            <!--<img src="./images/story.jpg" alt="">-->
               
             </div>
         </div>
